@@ -1,34 +1,32 @@
 class Task():
-    def __init__(self, description, deadline, status):
-        self.description = description
-        self.deadline = deadline
-        self.status = status
+    def __init__(self):
         self.tasks = []
-
     def add_task(self, description, deadline):
-        new_task = Task(description, deadline, self.status)
-        self.tasks.append(new_task)
+               self.tasks.append({"description": description, "deadline": deadline, "status": "не выполнено"})
 
     def mark_task_as_done(self, description):
         for task in self.tasks:
-            if task.description == description:
-                task.status = True
-                break
+            if task["description"] == description:
+                task["status"] = "Выполнено"
+                print(f"Задача {description} не найдена")
+            else:
+                print(f"Задача {description} не найдена")
 
     def print_current_tasks(self):
-        print("Current tasks:")
+        print("текущие задачи:")
         for task in self.tasks:
-            print(f"Описание: {task.description}, Дата выполнения: {task.deadline}, Статус: {'Выполнено' if task.status else 'Не выполнено'}")
+            if task["status"] == "не выполнено":
+                print(f"{task['description']} - {task['deadline']}")
 
 
-task1 = Task("Задача1", "2024-04-01", False)
+task1 = Task()
+task1.add_task(description="прочитать книгу", deadline="01.06.2024")
+task1.add_task(description="Пробежать марафон", deadline="05.06.2024")
+task1.add_task(description="Починить машину", deadline="27.06.2024")
 
-task1.add_task("Выполнить проект №1", "15.10.2024")
-task1.add_task("Buy groceries", "20.10.2024")
-task1.add_task("Задача на 30 минут", "25.05.2024")
+task1.mark_task_as_done("прочитать книгу")
+
 task1.print_current_tasks()
 
-task1.mark_task_as_done("Buy groceries")
-task1.print_current_tasks()
 
 
